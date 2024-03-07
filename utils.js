@@ -9,4 +9,13 @@ const shuffle = (cards) => {
   return shuffled;
 };
 
+const isMatch = (card1, card2) => {
+  if (card1 === card2) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 module.exports = shuffle;
+module.exports = isMatch;

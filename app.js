@@ -16,19 +16,12 @@ const partners = [
 const numberOfCardsToMatch = 2;
 const content = document.getElementById("content");
 
+const beginner = document.getElementById("beginner");
+const medium = document.getElementById("medium");
+const expert = document.getElementById("expert");
+let lengthPartners = 0;
 let matchToCheck = [];
 let matches = [];
-
-const shuffle = (cards) => {
-  const shuffled = [];
-  const cardsLength = cards.length;
-  for (let i = 0; i < cardsLength; i++) {
-    const random = Math.floor(Math.random() * cards.length);
-    shuffled.push(cards[random]);
-    cards.splice(random, 1);
-  }
-  return shuffled;
-};
 
 const createCards = (array, classCard) => {
   for (let element of array) {
@@ -48,11 +41,13 @@ const createOneCard = (element, classCard) => {
     card.disabled = true;
 
     matchToCheck.push(card);
-    console.log(matchToCheck);
 
     if (matchToCheck.length === numberOfCardsToMatch) {
-      if (isMatch(matchToCheck)) {
-        success(matchToCheck);
+      const card1 = matchToCheck[0].getAttribute("value");
+      const card2 = matchToCheck[1].getAttribute("value");
+      if (isMatch(card1, card2)) {
+        let confirmedMatches = success(matchToCheck, matches);
+        matches = matches.concat(confirmedMatches);
         matchToCheck = [];
       } else {
         document.addEventListener("click", avoidClick, true);
@@ -74,22 +69,6 @@ const createOneCard = (element, classCard) => {
   });
 };
 
-const isMatch = (cards) => {
-  const card1 = cards[0].getAttribute("value");
-  const card2 = cards[1].getAttribute("value");
-  if (card1 === card2) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const success = (cards) => {
-  cards.forEach((card) => {
-    matches.push(card);
-  });
-};
-
 const fail = (cards) => {
   cards.forEach((card) => {
     card.style.backgroundImage = 'url("./images/reversoCarta.jpg")';
@@ -101,15 +80,6 @@ const avoidClick = (event) => {
   event.stopPropagation();
   event.preventDefault();
 };
-
-const isFinished = (matchedCards, partnersCardsLength) => {
-  return matchedCards.length === partnersCardsLength;
-};
-
-const beginner = document.getElementById("beginner");
-const medium = document.getElementById("medium");
-const expert = document.getElementById("expert");
-let lengthPartners = 0;
 
 beginner.addEventListener("click", () => {
   const partnersBeginner = partners.slice(0, 6);
@@ -140,4 +110,14 @@ expert.addEventListener("click", () => {
   form.style.display = "none";
 });
 
-module.exports = shuffle;
+const isFinished = (matchedCards, partnersCardsLength) => {
+  return matchedCards.length === partnersCardsLength;
+};
+
+const success = (cards) => {
+  let matches = [];
+  cards.forEach((card) => {
+    matches.push(card);
+  });
+  return matches;
+};
