@@ -17,5 +17,17 @@ const isMatch = (card1, card2) => {
   }
 };
 
+const isFinished = (matchedCards, partnersCardsLength) => {
+  return matchedCards.length === partnersCardsLength;
+};
+
+const success = (cards) => {
+  let matches = [];
+  cards.forEach((card) => {
+    matches.push(card);
+  });
+  return matches;
+};
+
 module.exports = shuffle;
 module.exports = isMatch;
