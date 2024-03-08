@@ -29,5 +29,9 @@ const success = (cards) => {
   return matches;
 };
 
-module.exports = shuffle;
-module.exports = isMatch;
+module.exports = {
+  shuffle: shuffle,
+  isMatch: isMatch,
+  isFinished: isFinished,
+  success: success,
+};
