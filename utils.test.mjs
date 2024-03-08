@@ -1,4 +1,4 @@
-const { shuffle, isMatch, isFinished, success } = require("./utils");
+import { shuffle, isMatch, isFinished, success } from "./utils.js";
 
 test("with an array, return same array disordered", () => {
   // evnetualmente no pasará porque no es 100%seguro que cambie al haber un ramdom
