@@ -16,25 +16,33 @@ test("has title", async ({ page }) => {
 
 test("has begginer", async ({ page }) => {
   await page.getByLabel("Principiante").check();
+  await expect(page.getByLabel("Principiante")).toBeChecked();
 });
 
 test("has medium", async ({ page }) => {
   await page.getByLabel("Medio").check();
+  await expect(page.getByLabel("Medio")).toBeChecked();
 });
 
 test("has expert", async ({ page }) => {
   await page.getByLabel("Experto").check();
+  await expect(page.getByLabel("Experto")).toBeChecked();
 });
-/*
-test("get started link", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
 
-  // Click the get started link.
-  await page.getByRole("link", { name: "Get started" }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(
-    page.getByRole("heading", { name: "Installation" })
-  ).toBeVisible();
+test("whith beginner click 6 tags created", async ({ page }) => {
+  await page.getByLabel("Principiante").click();
+  const list = page.locator(".beginner");
+  await expect(list).toHaveCount(6);
 });
-*/
+
+test("whith medium click 8 tags created", async ({ page }) => {
+  await page.getByLabel("Medio").click();
+  const list = page.locator(".medium");
+  await expect(list).toHaveCount(8);
+});
+
+test("whith expert click 12 tags created", async ({ page }) => {
+  await page.getByLabel("Experto").click();
+  const list = page.locator(".expert");
+  await expect(list).toHaveCount(12);
+});
