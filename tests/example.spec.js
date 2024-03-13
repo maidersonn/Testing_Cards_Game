@@ -56,7 +56,7 @@ test("with click on card, disabled true", async ({ page }) => {
 
 test("whith click on card change background", async ({ page }) => {
   await page.getByLabel("Principiante").click();
-  const button = await page.getByRole("button").first();
+  const button = page.getByRole("button").first();
   const reverseImage = await button.evaluate((e) => {
     return window.getComputedStyle(e).getPropertyValue("background-image");
   });
@@ -64,5 +64,29 @@ test("whith click on card change background", async ({ page }) => {
   const newImage = await button.evaluate((e) => {
     return window.getComputedStyle(e).getPropertyValue("background-image");
   });
-  await expect(reverseImage).not.toBe(newImage);
+  expect(reverseImage).not.toBe(newImage);
+});
+
+//('button:nth-child(3)
+
+test("with two cards click and diferent image, cards' disabled false after 1 sec. If same image disable true", async ({
+  page,
+}) => {
+  await page.getByLabel("Principiante").click();
+  const card1 = page.locator("button").locator("nth=0");
+  const card2 = page.locator("button").locator("nth=-1");
+  await card1.click();
+  await card2.click();
+  const card1Image = await card1.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  const card2Image = await card2.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  if (card1Image != card2Image) {
+    console.log("true");
+    await expect(card1).not.toBeDisabled({ timeout: 2000 });
+  } else {
+    await expect(card1).toBeDisabled({ timeout: 2000 });
+  }
 });
