@@ -46,3 +46,10 @@ test("whith expert click 12 tags created", async ({ page }) => {
   const list = page.locator(".expert");
   await expect(list).toHaveCount(12);
 });
+
+test("with click on card, disabled true", async ({ page }) => {
+  await page.getByLabel("Principiante").click();
+  const button = await page.getByRole("button").first();
+  await button.click();
+  await expect(button).toBeDisabled();
+});
