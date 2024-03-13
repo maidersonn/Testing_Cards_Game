@@ -53,3 +53,16 @@ test("with click on card, disabled true", async ({ page }) => {
   await button.click();
   await expect(button).toBeDisabled();
 });
+
+test("whith click on card change background", async ({ page }) => {
+  await page.getByLabel("Principiante").click();
+  const button = await page.getByRole("button").first();
+  const reverseImage = await button.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  await button.click();
+  const newImage = await button.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  await expect(reverseImage).not.toBe(newImage);
+});
