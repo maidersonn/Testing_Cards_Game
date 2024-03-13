@@ -67,9 +67,7 @@ test("whith click on card change background", async ({ page }) => {
   expect(reverseImage).not.toBe(newImage);
 });
 
-//('button:nth-child(3)
-
-test("with two cards click and diferent image, cards' disabled false after 1 sec. If same image disable true", async ({
+test("In Pricipiante page: with two cards click and diferent image, cards' disabled false after 1 sec. If same image disable true", async ({
   page,
 }) => {
   await page.getByLabel("Principiante").click();
@@ -84,7 +82,48 @@ test("with two cards click and diferent image, cards' disabled false after 1 sec
     return window.getComputedStyle(e).getPropertyValue("background-image");
   });
   if (card1Image != card2Image) {
-    console.log("true");
+    await expect(card1).not.toBeDisabled({ timeout: 2000 });
+  } else {
+    await expect(card1).toBeDisabled({ timeout: 2000 });
+  }
+});
+
+test("In Medio page: with two cards click and diferent image, cards' disabled false after 1 sec. If same image disable true", async ({
+  page,
+}) => {
+  await page.getByLabel("Medio").click();
+  const card1 = page.locator("button").locator("nth=0");
+  const card2 = page.locator("button").locator("nth=-1");
+  await card1.click();
+  await card2.click();
+  const card1Image = await card1.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  const card2Image = await card2.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  if (card1Image != card2Image) {
+    await expect(card1).not.toBeDisabled({ timeout: 2000 });
+  } else {
+    await expect(card1).toBeDisabled({ timeout: 2000 });
+  }
+});
+
+test("In Experto page: with two cards click and diferent image, cards' disabled false after 1 sec. If same image disable true", async ({
+  page,
+}) => {
+  await page.getByLabel("Experto").click();
+  const card1 = page.locator("button").locator("nth=0");
+  const card2 = page.locator("button").locator("nth=-1");
+  await card1.click();
+  await card2.click();
+  const card1Image = await card1.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  const card2Image = await card2.evaluate((e) => {
+    return window.getComputedStyle(e).getPropertyValue("background-image");
+  });
+  if (card1Image != card2Image) {
     await expect(card1).not.toBeDisabled({ timeout: 2000 });
   } else {
     await expect(card1).toBeDisabled({ timeout: 2000 });
