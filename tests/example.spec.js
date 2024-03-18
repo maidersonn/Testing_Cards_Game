@@ -129,3 +129,15 @@ test("In Experto page: with two cards click and diferent image, cards' disabled 
     await expect(card1).toBeDisabled({ timeout: 2000 });
   }
 });
+
+test("In Pricipiante page: with all cards matched , new element is shown", async ({
+  page,
+}) => {
+  await page.evaluate((e) => {
+    matches = [1, 1, 1, 1, 1, 1];
+  });
+
+  await page.getByLabel("Principiante").click();
+  await page.locator("button").first().click();
+  await expect(page.locator(".playAgain")).toHaveText("Volver a jugar");
+});
