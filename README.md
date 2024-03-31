@@ -6,12 +6,12 @@ I am using my own proyect called Cards-Game to learn testing. This proyect is in
 
 It is a simple project built wiht Javascript, HTML, CSS.
 
-I am using Jest to test pure functionality.
+I am using Jest to test pure functionality. And Playwright to make test end-to-end.
 
 ### Set up
 
 'npm install'
 
-'npm test' to run tests
+open 'index.html' with life server 
 
-open 'index.html' file with Live Server to play the game
+'npm test' to run tests
