@@ -2,7 +2,7 @@
 
 ### Description
 
-I am using my own proyect called Cards-Game to learn testing. This proyect is in github as well.
+I am using my own proyect called Cards-Game to learn testing. This proyect is in github as well: https://github.com/maidersonn/Cards-Game
 
 It is a simple project built wiht Javascript, HTML, CSS.
 
